@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>ToDoアプリ</title>
+</head>
+<body>
+    <h1>ToDoリスト</h1>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                {{ todo.title }} (作成日時: {{ todo.created_at }})
+                <a href="{% url 'edit' todo.id %}">編集</a>
+                <a href="{% url 'delete' todo.id %}">削除</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+        <label for="title">タイトル：</label>
+        <input type="text" id="title" name="title" required>
+        <button type="submit">ToDoを追加</button>
+    </form>
+</body>
+</html>
